@@ -25,7 +25,7 @@ function getData(){
             pn_no: document.getElementById('contact-no-input').value,
             date: `${curr_date_time.getDate()}-${curr_date_time.getMonth()}-${curr_date_time.getFullYear()}`,
             arv_time: `${curr_date_time.getHours()}:${curr_date_time.getMinutes()}:${curr_date_time.getSeconds()}`,
-            lv_time: `<input type="button" value="LEAVE" class="lv-btn" id="${document.getElementById('vehicle-no-input').value}-${curr_date_time.getDate()}_${curr_date_time.getMonth()}_${curr_date_time.getFullYear()}-${curr_date_time.getHours()}_${curr_date_time.getMinutes()}_${curr_date_time.getSeconds()}" onclick="markLeave(this.id, v_details)" />`
+            lv_time: `<input type="button" value="LEAVE" class="lv-btn" id="${document.getElementById('vehicle-no-input').value}-${curr_date_time.getDate()}_${curr_date_time.getMonth()}_${curr_date_time.getFullYear()}-${curr_date_time.getHours()}_${curr_date_time.getMinutes()}_${curr_date_time.getSeconds()}" onclick="markLeave(this.id, v_details)"/>`
         }
     );
 }
@@ -55,8 +55,12 @@ function markLeave(btn_id, arr){
     document.getElementById(btn_id).style.fontFamily = "Arial, Helvetica, sans-serif";
     document.getElementById(btn_id).style.fontSize = "16px";
     document.getElementById(btn_id).disabled = true;
-    console.log(btn_id);
-    
+    for(let i=0; i<arr.length; i++){
+        if(arr[i]['lv_time'] == `<input type="button" value="LEAVE" class="lv-btn" id="${btn_id}" onclick="markLeave(this.id, v_details)"/>`){
+            arr[i]["lv_time"] = `${curr_date_time.getHours()}:${curr_date_time.getMinutes()}:${curr_date_time.getSeconds()}`;
+        };
+    }
+    localStorage.setItem("vehicle_details", JSON.stringify(v_details));
 }
 
 function clearInputFields(){
