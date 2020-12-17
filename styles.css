@@ -94,3 +94,20 @@ body{
     background-color: green;
     color: white;
 }
+
+.lv-btn{
+    background-color: red;
+    color: white;
+    border: 0;
+    font-weight: bold;
+}
+
+.lv-btn:hover{
+    background-color: rgb(255, 121, 121);
+    color: black;
+    border: 0;
+}
+
+.lv-btn:active{
+    border: 0;
+}

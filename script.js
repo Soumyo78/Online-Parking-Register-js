@@ -24,7 +24,7 @@ function getData(){
             v_des: document.getElementById('vehicle-des-input').value,
             pn_no: document.getElementById('contact-no-input').value,
             date: `${curr_date_time.getDate()}-${curr_date_time.getMonth()}-${curr_date_time.getFullYear()}`,
-            arv_time: `${curr_date_time.getHours()}:${curr_date_time.getMinutes()}:${curr_date_time.getSeconds()}`,
+            arv_time: `${curr_date_time.toLocaleTimeString('en-US')}`,
             lv_time: `<input type="button" value="LEAVE" class="lv-btn" id="${document.getElementById('vehicle-no-input').value}-${curr_date_time.getDate()}_${curr_date_time.getMonth()}_${curr_date_time.getFullYear()}-${curr_date_time.getHours()}_${curr_date_time.getMinutes()}_${curr_date_time.getSeconds()}" onclick="markLeave(this.id, v_details)"/>`
         }
     );
@@ -45,19 +45,19 @@ function loadData(arr1, arr2){
 function markLeave(btn_id, arr){
     let curr_date_time = new Date();
     document.getElementById(btn_id).type = 'text';
-    document.getElementById(btn_id).value = `${curr_date_time.getHours()}:${curr_date_time.getMinutes()}:${curr_date_time.getSeconds()}`;
+    document.getElementById(btn_id).value = `${curr_date_time.toLocaleTimeString('en-US')}`;
     document.getElementById(btn_id).style.backgroundColor = "rgb(247, 247, 94)";
     document.getElementById(btn_id).style.color = "black";
     document.getElementById(btn_id).style.border = "0";
     document.getElementById(btn_id).style.textAlign = "center";
-    document.getElementById(btn_id).style.width = "80px";
+    document.getElementById(btn_id).style.width = "100px";
     document.getElementById(btn_id).style.fontWeight = "bold";
     document.getElementById(btn_id).style.fontFamily = "Arial, Helvetica, sans-serif";
     document.getElementById(btn_id).style.fontSize = "16px";
     document.getElementById(btn_id).disabled = true;
     for(let i=0; i<arr.length; i++){
         if(arr[i]['lv_time'] == `<input type="button" value="LEAVE" class="lv-btn" id="${btn_id}" onclick="markLeave(this.id, v_details)"/>`){
-            arr[i]["lv_time"] = `${curr_date_time.getHours()}:${curr_date_time.getMinutes()}:${curr_date_time.getSeconds()}`;
+            arr[i]["lv_time"] = `${curr_date_time.toLocaleTimeString('en-US')}`;
         };
     }
     localStorage.setItem("vehicle_details", JSON.stringify(v_details));
